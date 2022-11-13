@@ -1,6 +1,8 @@
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import LoginPage from "./pages/LoginPage";
+import KakaoRedirectHandler from "./handlers/KakaoRedirectHandler";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -18,6 +20,7 @@ function App() {
             <GlobalStyle />
             <Routes>
                 <Route path="/" element={<LoginPage />} />
+                <Route path="/oauth/kakao" element={<KakaoRedirectHandler />} />
             </Routes>
         </>
     );
