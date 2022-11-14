@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
+import { login } from "../api/login";
 
 const KakaoRedirectHandler = () => {
     const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
@@ -8,8 +9,6 @@ const KakaoRedirectHandler = () => {
         let params = new URL(document.location.toString()).searchParams;
         let code = params.get("code"); // 인가코드 받는 부분
         let grant_type = "authorization_code";
-
-        console.log(code);
         axios
             .post(
                 `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&code=${code}`,
@@ -20,8 +19,10 @@ const KakaoRedirectHandler = () => {
                     },
                 }
             )
-            .then((res) => {
-                console.log(res.data["access_token"]);
+            .then(async (res) => {
+                const accessToken = res.data["access_token"];
+                const response = await login({ accessToken });
+                console.log(response);
             });
     }, [CLIENT_ID, REDIRECT_URI]);
 
