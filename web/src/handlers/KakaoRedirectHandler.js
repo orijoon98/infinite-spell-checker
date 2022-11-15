@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { login } from "../api/login";
+import { useNavigate } from "react-router-dom";
 
 const KakaoRedirectHandler = () => {
+    const navigate = useNavigate();
     const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
     const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
     useEffect(() => {
@@ -21,10 +23,10 @@ const KakaoRedirectHandler = () => {
             )
             .then(async (res) => {
                 const accessToken = res.data["access_token"];
-                const response = await login({ accessToken });
-                console.log(response);
+                await login({ accessToken });
+                navigate("/main");
             });
-    }, [CLIENT_ID, REDIRECT_URI]);
+    }, [CLIENT_ID, REDIRECT_URI, navigate]);
 
     return <div>로그인 중</div>;
 };
