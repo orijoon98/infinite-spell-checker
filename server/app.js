@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const logger = require("./configs/logger");
 const env = require("./configs/index");
+const handleErrors = require("./routes/middlewares/handleError");
 
 const auth = require("./routes/auth");
 
@@ -16,3 +17,5 @@ app.use("/api/auth", auth);
 app.listen(8000, () => {
     logger.info("server started");
 });
+
+app.use(handleErrors);
