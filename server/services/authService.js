@@ -1,8 +1,9 @@
 const env = require("../configs/index");
 const jwt = require("jsonwebtoken");
-
 const axios = require("axios");
+const user = require("../models/user");
 const { JWT_SECRET } = env;
+const NOT_FOUND = "NOT_FOUND";
 
 exports.login = async (req) => {
     try {
@@ -15,13 +16,16 @@ exports.login = async (req) => {
             }
         );
         const socialId = kakaoResponse.data.id;
-        console.log(socialId);
-        const userId = 1;
+        let userId = await user.findUserIdBySocialId(socialId);
+        if (userId == NOT_FOUND) {
+            await user.createUser(socialId);
+            userId = await user.findUserIdBySocialId(socialId);
+        }
         const token = jwt.sign({ userId: userId }, JWT_SECRET, {
             expiresIn: "365d",
         });
-        return { status: 200, data: token };
+        return token;
     } catch (err) {
-        return { status: 500, data: err };
+        throw err;
     }
 };
