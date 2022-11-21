@@ -5,6 +5,7 @@ const env = require("./configs/index");
 const handleErrors = require("./routes/middlewares/handleError");
 
 const auth = require("./routes/auth");
+const spell = require("./routes/spell");
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/auth", auth);
+app.use("/api/spell", spell);
 
 app.listen(8000, () => {
     logger.info("server started");
