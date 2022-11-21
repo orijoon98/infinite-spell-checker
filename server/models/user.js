@@ -17,6 +17,5 @@ module.exports = {
         const sqlInsert = "INSERT INTO user (social_id) VALUES (?)";
         const params = [socialId];
         const [rows] = await db.queryWithTransaction(sqlInsert, params);
-        console.log(rows);
     },
 };
