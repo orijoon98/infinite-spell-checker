@@ -95,11 +95,15 @@ const Main = ({
                         <TextAreaContainer name="textArea">
                             <ResultArea>{spellCheck()}</ResultArea>
                         </TextAreaContainer>
-                        <div>
-                            오타 의심 단어 <span css={RedText}>{typos}</span>개
-                        </div>
+                        <CheckResultContainer>
+                            <CheckResultArea>
+                                오타 의심 단어{" "}
+                                <span css={RedText}>{typos}</span>개
+                            </CheckResultArea>
+                        </CheckResultContainer>
                         <ButtonContainer>
-                            <button onClick={onCopy}>복사하기</button>
+                            <CopyButton onClick={onCopy}>복사하기</CopyButton>
+                            <SaveButton>저장하기</SaveButton>
                             <FinishButton onClick={onFinish}>
                                 검사 종료하기
                             </FinishButton>
@@ -153,7 +157,7 @@ const Main = ({
                         </TextAreaContainer>
                         <ButtonContainer>
                             <CheckButton onClick={onCheck} disabled={loading}>
-                                맞춤법 검사하기
+                                검사하기
                             </CheckButton>
                         </ButtonContainer>
                     </>
@@ -221,16 +225,80 @@ const ResultArea = styled.div`
     overflow: auto;
 `;
 
-const ButtonContainer = styled.div``;
+const CheckResultContainer = styled.div`
+    width: 720px;
+    height: 50px;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    margin: auto;
+`;
+
+const CheckResultArea = styled.div`
+    padding-top: 12px;
+    font-size: 18px;
+`;
+
+const ButtonContainer = styled.div`
+    margin-top: 20px;
+`;
 
 const CheckButton = styled.button`
     width: 200px;
-    height: 100px;
+    height: 50px;
+    font-family: "line";
+    font-size: 16px;
+    background-color: #74b9ff;
+    border: 1px solid black;
+    &:hover {
+        cursor: pointer;
+        background-color: #0984e3;
+        transition: 0.7s;
+    }
+`;
+
+const CopyButton = styled.button`
+    width: 200px;
+    height: 50px;
+    font-family: "line";
+    font-size: 16px;
+    background-color: #b2bec3;
+    border: 1px solid black;
+    margin-right: 20px;
+    &:hover {
+        cursor: pointer;
+        background-color: #636e72;
+        transition: 0.7s;
+    }
+`;
+
+const SaveButton = styled.button`
+    width: 200px;
+    height: 50px;
+    font-family: "line";
+    font-size: 16px;
+    background-color: #b2bec3;
+    border: 1px solid black;
+    &:hover {
+        cursor: pointer;
+        background-color: #636e72;
+        transition: 0.7s;
+    }
 `;
 
 const FinishButton = styled.button`
     width: 200px;
-    height: 100px;
+    height: 50px;
+    font-family: "line";
+    font-size: 16px;
+    background-color: #74b9ff;
+    border: 1px solid black;
+    margin-left: 20px;
+    &:hover {
+        cursor: pointer;
+        background-color: #0984e3;
+        transition: 0.7s;
+    }
 `;
 
 const TextButton = css`
