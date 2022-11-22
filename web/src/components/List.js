@@ -2,42 +2,41 @@
 import styled from "styled-components";
 import { css } from "@emotion/react";
 
-const History = ({ onCopy }) => {
+const List = ({}) => {
     return (
-        <HistoryContainer>
-            <HistoryWrapper>
-                <HistoryTitle>
+        <ListContainer>
+            <ListWrapper>
+                <ListTitle>
                     <h2>저장 목록</h2>
-                </HistoryTitle>
+                </ListTitle>
                 <TitleContainer>
-                    <TitleArea>제목이 들어감</TitleArea>
+                    <TitleArea>저장 목록 리스트 개수</TitleArea>
                 </TitleContainer>
                 <TextAreaContainer>
-                    <ResultArea>내용이 들어감</ResultArea>
+                    <ResultArea>제목별 리스트가 들어감</ResultArea>
                 </TextAreaContainer>
                 <ButtonContainer>
                     <BackButton>뒤로가기</BackButton>
-                    <CopyButton onClick={onCopy}>복사하기</CopyButton>
                 </ButtonContainer>
-            </HistoryWrapper>
-        </HistoryContainer>
+            </ListWrapper>
+        </ListContainer>
     );
 };
 
-const HistoryContainer = styled.div`
+const ListContainer = styled.div`
     text-align: center;
     width: 100vw;
     height: 100vh;
     font-family: "line";
 `;
 
-const HistoryWrapper = styled.div`
+const ListWrapper = styled.div`
     width: 100%;
     height: 100%;
     margin: auto;
 `;
 
-const HistoryTitle = styled.div`
+const ListTitle = styled.div`
     margin-top: 100px;
     margin-bottom: 50px;
 `;
@@ -83,7 +82,6 @@ const BackButton = styled.button`
     font-size: 16px;
     background-color: #b2bec3;
     border: 1px solid #dfe6e9;
-    margin-right: 10px;
     &:hover {
         cursor: pointer;
         background-color: #636e72;
@@ -91,19 +89,4 @@ const BackButton = styled.button`
     }
 `;
 
-const CopyButton = styled.button`
-    width: 200px;
-    height: 50px;
-    font-family: "line";
-    font-size: 16px;
-    background-color: #74b9ff;
-    border: 1px solid #dfe6e9;
-    margin-left: 10px;
-    &:hover {
-        cursor: pointer;
-        background-color: #0984e3;
-        transition: 0.7s;
-    }
-`;
-
-export default History;
+export default List;

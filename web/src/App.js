@@ -4,6 +4,7 @@ import { createGlobalStyle } from "styled-components";
 import LoginPage from "./pages/LoginPage";
 import KakaoRedirectHandler from "./handlers/KakaoRedirectHandler";
 import MainPage from "./pages/MainPage";
+import ListPage from "./pages/ListPage";
 import HistoryPage from "./pages/HistoryPage";
 
 const GlobalStyle = createGlobalStyle`
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/" element={<LoginPage />} />
                 <Route path="/oauth/kakao" element={<KakaoRedirectHandler />} />
                 <Route path="/main" element={<MainPage />} />
+                <Route path="/list" element={<ListPage />} />
                 <Route path="/history" element={<HistoryPage />} />
             </Routes>
         </>
