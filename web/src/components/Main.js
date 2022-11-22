@@ -84,17 +84,22 @@ const Main = ({
                 </MainTitle>
                 {checked ? (
                     <>
-                        <div>
-                            공백포함: 총 <span css={BlueText}>{blankO}</span>자
-                            | 공백제외: 총 <span css={BlueText}>{blankX}</span>
-                            자
-                        </div>
+                        <CountAreaContainer>
+                            <CountArea>
+                                공백포함: 총{" "}
+                                <span css={BlueText}>{blankO}</span>자 |
+                                공백제외: 총{" "}
+                                <span css={BlueText}>{blankX}</span>자
+                            </CountArea>
+                        </CountAreaContainer>
                         <TextAreaContainer name="textArea">
-                            <button onClick={onCopy}>복사</button>
-                            {spellCheck()}
+                            <ResultArea>{spellCheck()}</ResultArea>
                         </TextAreaContainer>
-                        <div>오타 의심 단어 {typos}개</div>
+                        <div>
+                            오타 의심 단어 <span css={RedText}>{typos}</span>개
+                        </div>
                         <ButtonContainer>
+                            <button onClick={onCopy}>복사하기</button>
                             <FinishButton onClick={onFinish}>
                                 검사 종료하기
                             </FinishButton>
@@ -127,14 +132,17 @@ const Main = ({
                     </>
                 ) : (
                     <>
-                        <div>
-                            공백포함: 총 <span css={BlueText}>{blankO}</span>자
-                            | 공백제외: 총 <span css={BlueText}>{blankX}</span>
-                            자
-                        </div>
+                        <CountAreaContainer>
+                            <CountArea>
+                                공백포함: 총{" "}
+                                <span css={BlueText}>{blankO}</span>자 |
+                                공백제외: 총{" "}
+                                <span css={BlueText}>{blankX}</span>자
+                            </CountArea>
+                        </CountAreaContainer>
                         <TextAreaContainer>
                             {loading ? (
-                                <Loading>맞춤법 검사중입니다.</Loading>
+                                <ResultArea>맞춤법 검사중입니다.</ResultArea>
                             ) : (
                                 <TextArea
                                     name="sentence"
@@ -163,6 +171,8 @@ const MainContainer = styled.div`
 `;
 
 const MainWrapper = styled.div`
+    width: 100%;
+    height: 100%;
     margin: auto;
 `;
 
@@ -171,16 +181,41 @@ const MainTitle = styled.div`
     margin-bottom: 50px;
 `;
 
-const TextAreaContainer = styled.div``;
+const TextAreaContainer = styled.div`
+    width: 720px;
+    height: 420px;
+    border: 1px solid;
+    margin: auto;
+`;
 
-const Loading = styled.div`
-    width: 70vw;
-    height: 30vh;
+const CountAreaContainer = styled.div`
+    width: 720px;
+    height: 50px;
+    border-top: 1px solid;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    margin: auto;
+`;
+
+const CountArea = styled.div`
+    margin: auto;
+    margin-top: 12px;
 `;
 
 const TextArea = styled.textarea`
-    width: 70vw;
-    height: 30vh;
+    width: 700px;
+    height: 400px;
+    resize: none;
+    border: none;
+    margin-top: 10px;
+`;
+
+const ResultArea = styled.div`
+    width: 700px;
+    height: 400px;
+    text-align: left;
+    margin: auto;
+    margin-top: 10px;
 `;
 
 const ButtonContainer = styled.div``;

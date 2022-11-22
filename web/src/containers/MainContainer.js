@@ -151,7 +151,9 @@ const MainContainer = () => {
     const onCopy = async (e) => {
         e.preventDefault();
         let text = "";
-        let list = e.target.parentElement.childNodes;
+        let resultArea = e.target.parentElement.parentElement.childNodes[2];
+        let list = resultArea.firstChild.childNodes;
+        console.log(list);
         for (let i = 0; i < list.length; i++) {
             if (list[i].getAttribute("name") == null) continue;
             text += list[i].getAttribute("name");
