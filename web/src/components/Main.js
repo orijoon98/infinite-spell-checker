@@ -15,6 +15,7 @@ const Main = ({
     onDirectClick,
     onSuggestionClick,
     onCopy,
+    onSave,
     onSaveList,
     typos,
     tokens,
@@ -24,6 +25,11 @@ const Main = ({
     fixed,
     blankO,
     blankX,
+    saveModal,
+    saveText,
+    saveTitle,
+    onSaveChange,
+    onSaveSubmit,
 }) => {
     const spellCheck = () => {
         const res = [];
@@ -106,11 +112,31 @@ const Main = ({
                         </CheckResultContainer>
                         <ButtonContainer>
                             <CopyButton onClick={onCopy}>복사하기</CopyButton>
-                            <SaveButton>저장하기</SaveButton>
+                            <SaveButton onClick={onSave}>저장하기</SaveButton>
                             <FinishButton onClick={onFinish}>
                                 검사 종료하기
                             </FinishButton>
                         </ButtonContainer>
+                        {saveModal ? (
+                            <SaveModal>
+                                <CancelModalButton onClick={onXButton}>
+                                    X
+                                </CancelModalButton>
+                                <SaveModalArea>
+                                    제목을 입력하세요.
+                                </SaveModalArea>
+                                <SaveInput
+                                    type="text"
+                                    onChange={onSaveChange}
+                                />
+                                <div></div>
+                                <SaveModalButton onClick={onSaveSubmit}>
+                                    저장
+                                </SaveModalButton>
+                            </SaveModal>
+                        ) : (
+                            <></>
+                        )}
                         {modal ? (
                             <Modal>
                                 <CancelModalButton onClick={onXButton}>
@@ -438,6 +464,46 @@ const ApplyModalButton = styled.button`
     border: 1px solid #dfe6e9;
     width: 40px;
     height: 20px;
+    &:hover {
+        cursor: pointer;
+    }
+`;
+
+const SaveModal = styled.div`
+    position: absolute;
+    background-color: white;
+    border: 1px solid black;
+    z-index: 100;
+    width: 500px;
+    height: 250px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+`;
+
+const SaveModalArea = styled.div`
+    text-align: center;
+    margin-top: 60px;
+    padding-left: 10px;
+    padding-bottom: 20px;
+    font-size: 20px;
+`;
+
+const SaveInput = styled.input`
+    width: 340px;
+    height: 30px;
+    font-size: 16px;
+    border: 1px solid #dfe6e9;
+    padding-left: 5px;
+    font-family: "line";
+`;
+
+const SaveModalButton = styled.button`
+    margin-top: 20px;
+    background-color: white;
+    border: 1px solid #dfe6e9;
+    width: 100px;
+    height: 40px;
     &:hover {
         cursor: pointer;
     }

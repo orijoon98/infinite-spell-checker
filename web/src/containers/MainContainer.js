@@ -23,6 +23,9 @@ const MainContainer = () => {
     const [direct, setDirect] = useState("");
     const [blankO, setBlankO] = useState(0);
     const [blankX, setBlankX] = useState(0);
+    const [saveModal, setSaveModal] = useState(false);
+    const [saveText, setSaveText] = useState("");
+    const [saveTitle, setSaveTitle] = useState("");
 
     const onChange = (e) => {
         const {
@@ -39,7 +42,6 @@ const MainContainer = () => {
             const sentence = { ...form };
             const response = await spellCheck(sentence);
             const data = response.data.data;
-            console.log(data);
             setTypos(data.length);
 
             const tokens = new Set();
@@ -114,9 +116,23 @@ const MainContainer = () => {
         setModal(true);
     };
 
+    const onSave = async (e) => {
+        e.preventDefault();
+        let text = "";
+        let resultArea = e.target.parentElement.parentElement.childNodes[2];
+        let list = resultArea.firstChild.childNodes;
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].getAttribute("name") == null) continue;
+            text += list[i].getAttribute("name");
+        }
+        setSaveModal(true);
+        setSaveText(text);
+    };
+
     const onXButton = async (e) => {
         e.preventDefault();
         setModal(false);
+        setSaveModal(false);
     };
 
     const onDirectChange = (e) => {
@@ -167,6 +183,17 @@ const MainContainer = () => {
         navigate("/list");
     };
 
+    const onSaveChange = (e) => {
+        setSaveTitle(e.target.value);
+    };
+
+    const onSaveSubmit = (e) => {
+        e.preventDefault();
+        console.log(saveTitle);
+        console.log(saveText);
+        setSaveModal(false);
+    };
+
     const replaceAt = (string, index, replacement, len) => {
         return (
             string.substr(0, index) +
@@ -213,6 +240,7 @@ const MainContainer = () => {
             onDirectClick={onDirectClick}
             onSuggestionClick={onSuggestionClick}
             onCopy={onCopy}
+            onSave={onSave}
             onSaveList={onSaveList}
             typos={typos}
             tokens={tokens}
@@ -222,6 +250,11 @@ const MainContainer = () => {
             fixed={fixed}
             blankO={blankO}
             blankX={blankX}
+            saveModal={saveModal}
+            saveText={saveText}
+            saveTitle={saveTitle}
+            onSaveChange={onSaveChange}
+            onSaveSubmit={onSaveSubmit}
         />
     );
 };
