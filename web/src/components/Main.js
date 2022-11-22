@@ -15,6 +15,7 @@ const Main = ({
     onDirectClick,
     onSuggestionClick,
     onCopy,
+    onSaveList,
     typos,
     tokens,
     result,
@@ -176,7 +177,9 @@ const Main = ({
                             )}
                         </TextAreaContainer>
                         <ButtonContainer>
-                            <HistoryButton>저장 목록</HistoryButton>
+                            <HistoryButton onClick={onSaveList}>
+                                저장 목록
+                            </HistoryButton>
                             <CheckButton onClick={onCheck} disabled={loading}>
                                 검사하기
                             </CheckButton>

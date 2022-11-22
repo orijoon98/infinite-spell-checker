@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { css } from "@emotion/react";
 
-const List = ({}) => {
+const List = ({ onBack }) => {
     return (
         <ListContainer>
             <ListWrapper>
@@ -16,7 +16,7 @@ const List = ({}) => {
                     <ResultArea>제목별 리스트가 들어감</ResultArea>
                 </TextAreaContainer>
                 <ButtonContainer>
-                    <BackButton>뒤로가기</BackButton>
+                    <BackButton onClick={onBack}>뒤로가기</BackButton>
                 </ButtonContainer>
             </ListWrapper>
         </ListContainer>

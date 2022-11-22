@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { spellCheck } from "../api/check";
 import Main from "../components/Main";
+import { useNavigate } from "react-router-dom";
 
 const MainContainer = () => {
+    const navigate = useNavigate();
     const initForm = {
         sentence: "",
     };
@@ -160,6 +162,11 @@ const MainContainer = () => {
         navigator.clipboard.writeText(text);
     };
 
+    const onSaveList = async (e) => {
+        e.preventDefault();
+        navigate("/list");
+    };
+
     const replaceAt = (string, index, replacement, len) => {
         return (
             string.substr(0, index) +
@@ -206,6 +213,7 @@ const MainContainer = () => {
             onDirectClick={onDirectClick}
             onSuggestionClick={onSuggestionClick}
             onCopy={onCopy}
+            onSaveList={onSaveList}
             typos={typos}
             tokens={tokens}
             result={result}
