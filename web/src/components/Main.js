@@ -176,6 +176,7 @@ const Main = ({
                             )}
                         </TextAreaContainer>
                         <ButtonContainer>
+                            <HistoryButton>저장 목록</HistoryButton>
                             <CheckButton onClick={onCheck} disabled={loading}>
                                 검사하기
                             </CheckButton>
@@ -263,6 +264,21 @@ const ButtonContainer = styled.div`
     margin-top: 20px;
 `;
 
+const HistoryButton = styled.button`
+    width: 200px;
+    height: 50px;
+    font-family: "line";
+    font-size: 16px;
+    background-color: #b2bec3;
+    border: 1px solid #dfe6e9;
+    margin-right: 10px;
+    &:hover {
+        cursor: pointer;
+        background-color: #636e72;
+        transition: 0.7s;
+    }
+`;
+
 const CheckButton = styled.button`
     width: 200px;
     height: 50px;
@@ -270,6 +286,7 @@ const CheckButton = styled.button`
     font-size: 16px;
     background-color: #74b9ff;
     border: 1px solid #dfe6e9;
+    margin-left: 10px;
     &:hover {
         cursor: pointer;
         background-color: #0984e3;
