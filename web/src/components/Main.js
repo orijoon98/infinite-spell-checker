@@ -208,6 +208,8 @@ const TextArea = styled.textarea`
     resize: none;
     border: none;
     margin-top: 10px;
+    font-family: "line";
+    font-size: 16px;
 `;
 
 const ResultArea = styled.div`
@@ -216,6 +218,7 @@ const ResultArea = styled.div`
     text-align: left;
     margin: auto;
     margin-top: 10px;
+    overflow: auto;
 `;
 
 const ButtonContainer = styled.div``;
