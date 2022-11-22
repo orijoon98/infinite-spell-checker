@@ -65,11 +65,13 @@ const Main = ({
         let suggestions = modalDetail[1];
         for (let i = 0; i < suggestions.length; i++) {
             res.push(
-                <div key={i}>
+                <div key={i} css={Left}>
                     <span key={i} id={i} name={suggestions[i]} css={BlueText}>
                         {suggestions[i]}
                     </span>
-                    <button onClick={onSuggestionClick}>적용</button>
+                    <ApplyModalButton onClick={onSuggestionClick}>
+                        적용
+                    </ApplyModalButton>
                 </div>
             );
         }
@@ -110,25 +112,43 @@ const Main = ({
                         </ButtonContainer>
                         {modal ? (
                             <Modal>
-                                <button onClick={onXButton}>x</button>
-                                <div>
+                                <CancelModalButton onClick={onXButton}>
+                                    X
+                                </CancelModalButton>
+                                <ModalArea>
                                     틀린 단어{" "}
-                                    <span css={RedText}>{modalDetail[0]}</span>
-                                </div>
-                                <div>대체어 {substitutes()}</div>
-                                <div>
+                                    <WrongContainer>
+                                        <span css={RedText}>
+                                            {modalDetail[0]}
+                                        </span>
+                                    </WrongContainer>
+                                </ModalArea>
+                                <ModalArea>
+                                    <div>대체어</div>
+                                    <SubstituteContainer>
+                                        {substitutes()}
+                                    </SubstituteContainer>
+                                </ModalArea>
+                                <ModalArea>
                                     직접 입력{" "}
-                                    <input
-                                        type="text"
-                                        onChange={onDirectChange}
-                                    />
-                                    <button onClick={onDirectClick}>
-                                        적용
-                                    </button>
-                                </div>
-                                <div>
-                                    도움말 보기 <span>{modalDetail[2]}</span>
-                                </div>
+                                    <EnterContainer>
+                                        <EnterInput
+                                            type="text"
+                                            onChange={onDirectChange}
+                                        />
+                                        <ApplyModalButton
+                                            onClick={onDirectClick}
+                                        >
+                                            적용
+                                        </ApplyModalButton>
+                                    </EnterContainer>
+                                </ModalArea>
+                                <ModalArea>
+                                    도움말 보기{" "}
+                                    <HelpContainer>
+                                        <span>{modalDetail[2]}</span>
+                                    </HelpContainer>
+                                </ModalArea>
                             </Modal>
                         ) : (
                             <></>
@@ -188,16 +208,16 @@ const MainTitle = styled.div`
 const TextAreaContainer = styled.div`
     width: 720px;
     height: 420px;
-    border: 1px solid;
+    border: 1px solid #dfe6e9;
     margin: auto;
 `;
 
 const CountAreaContainer = styled.div`
     width: 720px;
     height: 50px;
-    border-top: 1px solid;
-    border-left: 1px solid;
-    border-right: 1px solid;
+    border-top: 1px solid #dfe6e9;
+    border-left: 1px solid #dfe6e9;
+    border-right: 1px solid #dfe6e9;
     margin: auto;
 `;
 
@@ -228,9 +248,9 @@ const ResultArea = styled.div`
 const CheckResultContainer = styled.div`
     width: 720px;
     height: 50px;
-    border-left: 1px solid;
-    border-right: 1px solid;
-    border-bottom: 1px solid;
+    border-left: 1px solid #dfe6e9;
+    border-right: 1px solid #dfe6e9;
+    border-bottom: 1px solid #dfe6e9;
     margin: auto;
 `;
 
@@ -249,7 +269,7 @@ const CheckButton = styled.button`
     font-family: "line";
     font-size: 16px;
     background-color: #74b9ff;
-    border: 1px solid black;
+    border: 1px solid #dfe6e9;
     &:hover {
         cursor: pointer;
         background-color: #0984e3;
@@ -263,7 +283,7 @@ const CopyButton = styled.button`
     font-family: "line";
     font-size: 16px;
     background-color: #b2bec3;
-    border: 1px solid black;
+    border: 1px solid #dfe6e9;
     margin-right: 20px;
     &:hover {
         cursor: pointer;
@@ -278,7 +298,7 @@ const SaveButton = styled.button`
     font-family: "line";
     font-size: 16px;
     background-color: #b2bec3;
-    border: 1px solid black;
+    border: 1px solid #dfe6e9;
     &:hover {
         cursor: pointer;
         background-color: #636e72;
@@ -292,7 +312,7 @@ const FinishButton = styled.button`
     font-family: "line";
     font-size: 16px;
     background-color: #74b9ff;
-    border: 1px solid black;
+    border: 1px solid #dfe6e9;
     margin-left: 20px;
     &:hover {
         cursor: pointer;
@@ -318,15 +338,89 @@ const BlueText = css`
     color: blue;
 `;
 
+const Left = css`
+    float: left;
+`;
+
 const Modal = styled.div`
     position: absolute;
     background-color: white;
     border: 1px solid black;
     z-index: 100;
-    width: 50%;
-    height: 30%;
-    left: 25%;
-    top: 30%;
+    width: 500px;
+    height: 250px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+`;
+
+const ModalArea = styled.div`
+    text-align: left;
+    margin-top: 5px;
+    padding-left: 10px;
+    padding-bottom: 20px;
+`;
+
+const WrongContainer = styled.div`
+    position: absolute;
+    top: 5px;
+    left: 100px;
+`;
+
+const SubstituteContainer = styled.div`
+    position: absolute;
+    top: 51px;
+    left: 100px;
+`;
+
+const EnterContainer = styled.div`
+    position: absolute;
+    top: 97px;
+    left: 100px;
+`;
+
+const EnterInput = styled.input`
+    width: 340px;
+    height: 20px;
+    font-size: 13px;
+    border: 1px solid #dfe6e9;
+    padding-left: 5px;
+    font-family: "line";
+`;
+
+const HelpContainer = styled.div`
+    position: absolute;
+    top: 143px;
+    left: 100px;
+    border: 1px solid #dfe6e9;
+    width: 380px;
+    height: 85px;
+    font-size: 13px;
+    padding: 5px;
+    overflow: auto;
+`;
+
+const CancelModalButton = styled.button`
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    font-size: 20px;
+    background-color: white;
+    border: none;
+    &:hover {
+        cursor: pointer;
+    }
+`;
+
+const ApplyModalButton = styled.button`
+    margin-left: 5px;
+    background-color: white;
+    border: 1px solid #dfe6e9;
+    width: 40px;
+    height: 20px;
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 export default Main;
