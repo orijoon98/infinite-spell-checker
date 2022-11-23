@@ -12,3 +12,16 @@ exports.create = async (req, res, next) => {
         next(err);
     }
 };
+
+exports.findAll = async (req, res, next) => {
+    try {
+        const data = await historyService.findAll(res);
+        return res.status(200).json({
+            success: true,
+            message: "검사 결과 리스트 조회 성공",
+            data: data,
+        });
+    } catch (err) {
+        next(err);
+    }
+};

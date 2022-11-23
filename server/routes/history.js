@@ -7,5 +7,6 @@ const router = express.Router();
 router.use("/", auth.verifyToken);
 
 router.post("/", historyController.create);
+router.get("/list", historyController.findAll);
 
 module.exports = router;

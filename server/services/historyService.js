@@ -12,3 +12,14 @@ exports.create = async (req, res) => {
         throw err;
     }
 };
+
+exports.findAll = async (res) => {
+    try {
+        const userId = res.locals.userId;
+        const histories = await history.findAllHistoryByUserId(userId);
+        console.log(histories);
+        return histories;
+    } catch (err) {
+        throw err;
+    }
+};
