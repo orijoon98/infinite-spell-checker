@@ -26,7 +26,7 @@ function App() {
                 <Route path="/oauth/kakao" element={<KakaoRedirectHandler />} />
                 <Route path="/main" element={<MainPage />} />
                 <Route path="/list" element={<ListPage />} />
-                <Route path="/history" element={<HistoryPage />} />
+                <Route path="/history/:historyId" element={<HistoryPage />} />
             </Routes>
         </>
     );

@@ -1,18 +1,12 @@
 /** @jsxImportSource @emotion/react */
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const List = ({ onBack, result }) => {
-    const showList = () => {
-        const res = [];
-        for (let i = 0; i < result.length; i++) {
-            res.push(
-                <ListLi>
-                    <ListButton id={result[i].id}>{result[i].title}</ListButton>
-                </ListLi>
-            );
-        }
-        return res;
-    };
+    const navigate = useNavigate();
+    const onClickHistory = (id) => {
+        navigate(`/history/${id}`);
+    }
 
     return (
         <ListContainer>
@@ -24,7 +18,17 @@ const List = ({ onBack, result }) => {
                     <TitleArea>저장 수 : {result.length}개</TitleArea>
                 </TitleContainer>
                 <TextAreaContainer>
-                    <ResultArea>{showList()}</ResultArea>
+                    <ResultArea>
+                        {result.map((item) => {
+                            return (
+                                <ListLi>
+                                    <ListButton id={item.id} onClick={() => onClickHistory(item.id)}>
+                                        {item.title}
+                                    </ListButton>
+                                </ListLi>
+                            )
+                        })}
+                    </ResultArea>
                 </TextAreaContainer>
                 <ButtonContainer>
                     <BackButton onClick={onBack}>뒤로가기</BackButton>

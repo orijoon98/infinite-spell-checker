@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { css } from "@emotion/react";
 
-const History = ({ onBack, onCopy }) => {
+const History = ({ onBack, onCopy, title, text }) => {
     return (
         <HistoryContainer>
             <HistoryWrapper>
@@ -10,10 +10,10 @@ const History = ({ onBack, onCopy }) => {
                     <h2>저장 목록</h2>
                 </HistoryTitle>
                 <TitleContainer>
-                    <TitleArea>제목이 들어감</TitleArea>
+                    <TitleArea>{title}</TitleArea>
                 </TitleContainer>
                 <TextAreaContainer>
-                    <ResultArea>내용이 들어감</ResultArea>
+                    <ResultArea>{text}</ResultArea>
                 </TextAreaContainer>
                 <ButtonContainer>
                     <BackButton onClick={onBack}>뒤로가기</BackButton>
