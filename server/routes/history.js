@@ -8,5 +8,6 @@ router.use("/", auth.verifyToken);
 
 router.post("/", historyController.create);
 router.get("/list", historyController.findAll);
+router.get("/:historyId", historyController.findHistoryByUserIdAndHistoryId);
 
 module.exports = router;

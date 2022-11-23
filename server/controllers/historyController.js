@@ -25,3 +25,19 @@ exports.findAll = async (req, res, next) => {
         next(err);
     }
 };
+
+exports.findHistoryByUserIdAndHistoryId = async (req, res, next) => {
+    try {
+        const data = await historyService.findHistoryByUserIdAndHistoryId(
+            req,
+            res
+        );
+        return res.status(200).json({
+            success: true,
+            message: "검사 결과 조회 성공",
+            data: data,
+        });
+    } catch (err) {
+        next(err);
+    }
+};

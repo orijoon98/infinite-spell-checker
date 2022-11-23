@@ -11,6 +11,17 @@ module.exports = {
         return rows;
     },
 
+    findHistoryByUserIdAndHistoryId: async (userId, historyId) => {
+        const sqlSelect =
+            "SELECT title, text FROM history WHERE id = ? AND user_id = ?";
+        const params = [historyId, userId];
+        const [rows] = await db.query(sqlSelect, params);
+        if (rows.length < 1) {
+            return NOT_FOUND;
+        }
+        return rows[0];
+    },
+
     createHistory: async (userId, title, text) => {
         const sqlInsert =
             "INSERT INTO history (user_id, title, text) VALUES (?, ?, ?)";
