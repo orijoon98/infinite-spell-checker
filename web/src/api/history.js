@@ -5,3 +5,5 @@ export const createHistory = async ({ title, text }) =>
         title,
         text,
     });
+
+export const findAllHistory = async () => await axios.get("/api/history/list");
