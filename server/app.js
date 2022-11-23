@@ -7,6 +7,7 @@ const handleErrors = require("./routes/middlewares/handleError");
 
 const auth = require("./routes/auth");
 const spell = require("./routes/spell");
+const history = require("./routes/history");
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", auth);
 app.use("/api/spell", spell);
+app.use("/api/history", history);
 
 app.listen(8000, () => {
     logger.info("server started");
