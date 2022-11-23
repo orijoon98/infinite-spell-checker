@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { spellCheck } from "../api/check";
+import { createHistory } from "../api/history";
 import Main from "../components/Main";
 import { useNavigate } from "react-router-dom";
 
@@ -187,11 +188,21 @@ const MainContainer = () => {
         setSaveTitle(e.target.value);
     };
 
-    const onSaveSubmit = (e) => {
+    const onSaveSubmit = async (e) => {
         e.preventDefault();
-        console.log(saveTitle);
-        console.log(saveText);
-        setSaveModal(false);
+        try {
+            const response = await createHistory({
+                title: saveTitle,
+                text: saveText,
+            });
+            setSaveModal(false);
+            if (response.status === 401) {
+                navigate("/login");
+            }
+            alert("저장 성공입니다.");
+        } catch (e) {
+            alert("저장 실패입니다.");
+        }
     };
 
     const replaceAt = (string, index, replacement, len) => {
