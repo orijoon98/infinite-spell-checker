@@ -151,6 +151,15 @@ const MainContainer = () => {
         setFixed(tmpSet);
         setModal(false);
         setResult([...tmp]);
+        let text = "";
+        for (let i = 0; i < result.length; i++) {
+            if (result[i] === "<LineChange>") {
+                text += "\n";
+            } else {
+                text += result[i];
+            }
+        }
+        setForm({ sentence: text });
     };
 
     const onSuggestionClick = async (e) => {
@@ -165,6 +174,15 @@ const MainContainer = () => {
         setFixed(tmpSet);
         setModal(false);
         setResult([...tmp]);
+        let text = "";
+        for (let i = 0; i < result.length; i++) {
+            if (result[i] === "<LineChange>") {
+                text += "\n";
+            } else {
+                text += result[i];
+            }
+        }
+        setForm({ sentence: text });
     };
 
     const onCopy = async (e) => {
@@ -218,7 +236,7 @@ const MainContainer = () => {
         tmp = tmp.replace(/(\s*)/g, "");
         setBlankO(form["sentence"].length);
         setBlankX(tmp.length);
-    }, [form, checked]);
+    }, [form, checked, blankO, blankX]);
 
     useEffect(() => {
         let text = "";
