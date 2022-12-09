@@ -70,6 +70,7 @@ const ResultArea = styled.div`
     margin: auto;
     margin-top: 10px;
     overflow: auto;
+    white-space: pre-line;
 `;
 
 const ButtonContainer = styled.div`
